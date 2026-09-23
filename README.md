@@ -78,17 +78,24 @@ $env:AZUREML_MODEL_DIR = (Resolve-Path models).Path
 
 The request creator shrinks images to at most 512 pixels and encodes a JPEG to keep endpoint requests small.
 
-## 8. Run the Streamlit app
+## 8. Run the local browser app
 
-Install the UI dependencies and set the endpoint values in PowerShell:
+Install the UI dependencies and start the app from the project root:
+
+```powershell
+.venv\Scripts\python.exe -m pip install -r app\requirements.txt
+.venv\Scripts\streamlit.exe run app/app.py
+```
+
+Open the displayed local URL, usually `http://localhost:8501`. Upload any JPG, PNG, WEBP, or BMP photo and click **Classify photo**. The app uses the local model in `models/` by default, displays the annotated image with the animal and confidence printed on it, and shows all class scores.
+
+To use Azure later, set both variables before starting Streamlit:
 
 ```powershell
 $env:ENDPOINT_URL = 'https://your-endpoint-url'
 $env:ENDPOINT_KEY = 'your-endpoint-key'
 .venv\Scripts\streamlit.exe run app/app.py
 ```
-
-The app uploads a compressed image, sends the required bearer token, displays the prediction, confidence, all-score bar chart, and a warning below 60% confidence.
 
 ## Azure ML files
 
