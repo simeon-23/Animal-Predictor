@@ -1,6 +1,7 @@
 models/
 split/
 metrics/
+outputs/
 mlruns/
 .venv/
 __pycache__/

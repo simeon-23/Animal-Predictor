@@ -56,6 +56,8 @@ Evaluation prints overall accuracy, per-animal accuracy, and a confusion matrix.
 .venv\Scripts\python.exe src/predict.py --model_dir models --image demo_images/cat_demo.jpg
 ```
 
+This prints the prediction and saves an annotated image with the animal and confidence text to `outputs/prediction.jpg`. Use `--output another-name.jpg` to choose a different output path.
+
 ## 7. Test the Azure scoring script locally
 
 ```powershell

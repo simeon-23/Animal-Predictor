@@ -5,7 +5,7 @@ import os
 from pathlib import Path
 
 import torch
-from PIL import Image
+from PIL import Image, ImageDraw, ImageFont
 from torchvision import models, transforms
 
 
@@ -72,6 +72,20 @@ def predict_image(model, classes, pil_image):
         "confidence": float(probabilities[best_index]),
         "all_scores": scores,
     }
+
+
+def annotate_prediction(pil_image, result):
+    """Return a copy of the image with the animal and confidence printed on it."""
+    image = pil_image.convert("RGB").copy()
+    draw = ImageDraw.Draw(image)
+    font = ImageFont.load_default()
+    text = f"{result['animal']} - confidence {result['confidence'] * 100:.0f}%"
+    left, top, right, bottom = draw.textbbox((0, 0), text, font=font)
+    padding = 10
+    banner_height = bottom - top + padding * 2
+    draw.rectangle((0, 0, image.width, banner_height), fill=(0, 0, 0))
+    draw.text((padding, padding), text, fill=(255, 255, 255), font=font)
+    return image
 
 
 def log_metric(name, value, step=None):
