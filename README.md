@@ -58,6 +58,16 @@ Evaluation prints overall accuracy, per-animal accuracy, and a confusion matrix.
 
 This prints the prediction and saves an annotated image with the animal and confidence text to `outputs/prediction.jpg`. Use `--output another-name.jpg` to choose a different output path.
 
+### Simple editable image script
+
+If you prefer to edit an image path directly in a Python file, open `src/predict_and_save_image.py` and change `IMAGE_PATH`. Then run:
+
+```powershell
+.venv\Scripts\python.exe src\predict_and_save_image.py
+```
+
+It saves an annotated copy to `outputs/prediction_with_confidence.jpg` with the classification and confidence printed on the image.
+
 ## 7. Test the Azure scoring script locally
 
 ```powershell
